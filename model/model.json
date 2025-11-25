@@ -1,0 +1,1182 @@
+{
+	"proyecto": "hidroponico",
+	"host": "localhost",
+	"port": "5432",
+	"database": "hidroponico",
+	"user": "www-admin",
+	"password": "123456789",
+	"motordb": "postgres",
+	"classes": [
+		{
+			"class": "empresa",
+			"description": "Empresas independientes con configuraciones separadas (multiempresa)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de empresa",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 150,
+					"autoincrement": "False",
+					"description": "Nombre de la empresa",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nit",
+					"data_type": "string",
+					"length": 50,
+					"autoincrement": "False",
+					"description": "Número de identificación tributaria",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "activo",
+					"data_type": "boolean",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Estado de la empresa",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			]
+		},
+		{
+			"class": "persona",
+			"description": "Personas en el sistema (usuarios, responsables, operadores)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de persona",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre de la persona",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "apellido",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Apellido de la persona",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "documento",
+					"data_type": "string",
+					"length": 50,
+					"autoincrement": "False",
+					"description": "Número de documento de identidad",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "email",
+					"data_type": "string",
+					"length": 150,
+					"autoincrement": "False",
+					"description": "Correo electrónico",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "telefono",
+					"data_type": "string",
+					"length": 20,
+					"autoincrement": "False",
+					"description": "Número de teléfono",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "activo",
+					"data_type": "boolean",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Estado activo/inactivo",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			]
+		},
+		{
+			"class": "sede",
+			"description": "Sedes asociadas a una empresa",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de sede",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "empresa_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con empresa",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 150,
+					"autoincrement": "False",
+					"description": "Nombre de la sede",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "direccion",
+					"data_type": "string",
+					"length": 200,
+					"autoincrement": "False",
+					"description": "Dirección física de la sede",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "latitud",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Coordenada geográfica latitud",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "longitud",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Coordenada geográfica longitud",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "responsable_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con persona responsable",
+					"primary_key": "False",
+					"foreign_key": "True"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "empresa_id",
+					"tabla_destino": "empresa",
+					"campo_destino": "id"
+				},
+				{
+					"campo_origen": "responsable_id",
+					"tabla_destino": "persona",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "bloque",
+			"description": "Bloques para segmentar áreas de trabajo dentro de una sede",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de bloque",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "sede_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con sede",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre del bloque",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción del bloque",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "sede_id",
+					"tabla_destino": "sede",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "tipo_espacio",
+			"description": "Tipos de espacios físicos (invernadero, bodega, sala de germinación, laboratorio)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de tipo de espacio",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre del tipo de espacio",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción del tipo de espacio",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			]
+		},
+		{
+			"class": "espacio",
+			"description": "Espacios físicos asociados a un bloque",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de espacio",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "bloque_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con bloque",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "tipo_espacio_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con tipo de espacio",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre del espacio",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "capacidad",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Capacidad del espacio",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "ancho",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Ancho en metros",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "largo",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Largo en metros",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "alto",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Alto en metros",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "ubicacion",
+					"data_type": "string",
+					"length": 200,
+					"autoincrement": "False",
+					"description": "Ubicación específica del espacio",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "bloque_id",
+					"tabla_destino": "bloque",
+					"campo_destino": "id"
+				},
+				{
+					"campo_origen": "tipo_espacio_id",
+					"tabla_destino": "tipo_espacio",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "tipo_estructura",
+			"description": "Tipos de estructuras para cultivos (mesas, torres, canales NFT, etc)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de tipo de estructura",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre del tipo de estructura",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción del tipo de estructura",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			]
+		},
+		{
+			"class": "estructura",
+			"description": "Estructuras individuales dentro de espacios",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de estructura",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "espacio_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con espacio",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "tipo_estructura_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con tipo de estructura",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "codigo",
+					"data_type": "string",
+					"length": 50,
+					"autoincrement": "False",
+					"description": "Código identificador de la estructura",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre de la estructura",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "capacidad",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Capacidad de plantas",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "ancho",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Ancho en metros",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "largo",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Largo en metros",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "posicion_x",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Posición X en el mapa del espacio",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "posicion_y",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Posición Y en el mapa del espacio",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "espacio_id",
+					"tabla_destino": "espacio",
+					"campo_destino": "id"
+				},
+				{
+					"campo_origen": "tipo_estructura_id",
+					"tabla_destino": "tipo_estructura",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "usuario",
+			"description": "Usuarios del sistema con credenciales de acceso",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de usuario",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "persona_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con persona",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "empresa_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con empresa",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "username",
+					"data_type": "string",
+					"length": 50,
+					"autoincrement": "False",
+					"description": "Nombre de usuario",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "password_hash",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Hash de la contraseña",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "auto_registro",
+					"data_type": "boolean",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Indica si fue auto-registro",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "fecha_creacion",
+					"data_type": "timestamp",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Fecha de creación del usuario",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "ultimo_cambio_clave",
+					"data_type": "timestamp",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Fecha del último cambio de contraseña",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "persona_id",
+					"tabla_destino": "persona",
+					"campo_destino": "id"
+				},
+				{
+					"campo_origen": "empresa_id",
+					"tabla_destino": "empresa",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "rol",
+			"description": "Roles para control de acceso",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de rol",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre del rol",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción del rol",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			]
+		},
+		{
+			"class": "usuario_rol",
+			"description": "Relación entre usuarios y roles",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "usuario_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con usuario",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "rol_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con rol",
+					"primary_key": "False",
+					"foreign_key": "True"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "usuario_id",
+					"tabla_destino": "usuario",
+					"campo_destino": "id"
+				},
+				{
+					"campo_origen": "rol_id",
+					"tabla_destino": "rol",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "metodo_acceso",
+			"description": "Métodos de control de acceso (huella, RFID, facial)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "usuario_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con usuario",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "tipo",
+					"data_type": "string",
+					"length": 50,
+					"autoincrement": "False",
+					"description": "Tipo (huella, rfid, facial)",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "dato_biometrico",
+					"data_type": "string",
+					"length": 500,
+					"autoincrement": "False",
+					"description": "Datos biométricos o código de acceso",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "activo",
+					"data_type": "boolean",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Estado del método de acceso",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "usuario_id",
+					"tabla_destino": "usuario",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "acceso_espacio",
+			"description": "Control de acceso de usuarios a espacios físicos",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "usuario_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con usuario",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "espacio_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con espacio",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "fecha_acceso",
+					"data_type": "timestamp",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Fecha y hora del acceso",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "metodo_acceso",
+					"data_type": "string",
+					"length": 50,
+					"autoincrement": "False",
+					"description": "Método usado para acceder",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "usuario_id",
+					"tabla_destino": "usuario",
+					"campo_destino": "id"
+				},
+				{
+					"campo_origen": "espacio_id",
+					"tabla_destino": "espacio",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "tipo_cultivo",
+			"description": "Tipos de cultivos (hoja verde, frutos, aromáticas)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de tipo de cultivo",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre del tipo de cultivo",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción del tipo de cultivo",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			]
+		},
+		{
+			"class": "cultivo",
+			"description": "Cultivos específicos (lechuga, albahaca, fresa)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de cultivo",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "tipo_cultivo_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con tipo de cultivo",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre del cultivo",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre_cientifico",
+					"data_type": "string",
+					"length": 150,
+					"autoincrement": "False",
+					"description": "Nombre científico del cultivo",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción del cultivo",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "tipo_cultivo_id",
+					"tabla_destino": "tipo_cultivo",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "variedad_cultivo",
+			"description": "Variedades de cultivos (lechuga romana, lechuga crespa)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de variedad",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "cultivo_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con cultivo",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre de la variedad",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción de la variedad",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "caracteristicas",
+					"data_type": "string",
+					"length": 500,
+					"autoincrement": "False",
+					"description": "Características específicas",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "cultivo_id",
+					"tabla_destino": "cultivo",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "fase_produccion",
+			"description": "Fases de producción (germinación, crecimiento, cosecha)",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de fase",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre de la fase",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "duracion_estimada_dias",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Duración estimada en días",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción de la fase",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			]
+		},
+		{
+			"class": "cultivo_fase",
+			"description": "Configuración de fases por cultivo/variedad",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "variedad_cultivo_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con variedad de cultivo",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "fase_produccion_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con fase de producción",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "orden",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Orden de la fase en el ciclo",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "duracion_dias",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Duración específica para esta variedad",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "variedad_cultivo_id",
+					"tabla_destino": "variedad_cultivo",
+					"campo_destino": "id"
+				},
+				{
+					"campo_origen": "fase_produccion_id",
+					"tabla_destino": "fase_produccion",
+					"campo_destino": "id"
+				}
+			]
+		},
+		{
+			"class": "nutriente",
+			"description": "Nutrientes y soluciones nutritivas para cultivos",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único de nutriente",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "nombre",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Nombre del nutriente",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "formula_quimica",
+					"data_type": "string",
+					"length": 100,
+					"autoincrement": "False",
+					"description": "Fórmula química del nutriente",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "descripcion",
+					"data_type": "string",
+					"length": 255,
+					"autoincrement": "False",
+					"description": "Descripción del nutriente",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			]
+		},
+		{
+			"class": "fase_nutriente",
+			"description": "Nutrientes requeridos por fase de producción",
+			"attributes": [
+				{
+					"name": "id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "True",
+					"description": "Identificador único",
+					"primary_key": "True",
+					"foreign_key": "False"
+				},
+				{
+					"name": "cultivo_fase_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con cultivo_fase",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "nutriente_id",
+					"data_type": "int",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Relación con nutriente",
+					"primary_key": "False",
+					"foreign_key": "True"
+				},
+				{
+					"name": "cantidad",
+					"data_type": "float",
+					"length": 0,
+					"autoincrement": "False",
+					"description": "Cantidad del nutriente",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "unidad_medida",
+					"data_type": "string",
+					"length": 20,
+					"autoincrement": "False",
+					"description": "Unidad de medida (ml/L, ppm, etc)",
+					"primary_key": "False",
+					"foreign_key": "False"
+				},
+				{
+					"name": "frecuencia",
+					"data_type": "string",
+					"length": 50,
+					"autoincrement": "False",
+					"description": "Frecuencia de aplicación",
+					"primary_key": "False",
+					"foreign_key": "False"
+				}
+			],
+			"references": [
+				{
+					"campo_origen": "cultivo_fase_id",
+					"tabla_destino": "cultivo_fase",
+					"campo_destino": "id"
+				},
+				{
+					"campo_origen": "nutriente_id",
+					"tabla_destino": "nutriente",
+					"campo_destino": "id"
+				}
+			]
+		}
+	]
+}
