@@ -2,7 +2,7 @@
 	"proyecto": "hidroponico",
 	"host": "localhost",
 	"port": "5432",
-	"database": "hidroponico",
+	"database": "hidroponico-v2",
 	"user": "www-admin",
 	"password": "123456789",
 	"motordb": "postgres",
@@ -23,7 +23,7 @@
 				{
 					"name": "nombre",
 					"data_type": "string",
-					"length": 150,
+					"length": 50,
 					"autoincrement": "False",
 					"description": "Nombre de la empresa",
 					"primary_key": "False",

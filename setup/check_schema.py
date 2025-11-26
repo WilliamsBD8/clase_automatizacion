@@ -27,3 +27,6 @@ def sync_schema(connection, classes):
             
             print(f"↻ Verificando columnas eliminadas")
             migrator.remove_deleted_columns(table, attrs, references)
+
+            print(f"↻ Verificando columnas modificadas")
+            migrator.update_modified_columns(table, attrs)
